@@ -115,33 +115,17 @@ def deleteAll():
     result = db.testpy.delete_many({})
 
 def pushData():
-    for it_event in events:
+    for it_event in valid_events:
         result = collection.insert_one(it_event)
         result.inserted_id
-
-# -------------------------------- FOR TESTING
-events = [{"_id": "123456", 
-            "event": "Pi Day", 
-            "organization": "UBC Engineering", 
-            "date": "2017-03-14", 
-            "start_time": "08:00:00", 
-            "end_time": "20:00:00",
-            "location": "Kaiser Atrium",
-            "url": "http://facebook.com/freefood"},
-            {"_id": "246810", 
-            "event": "July 4th", 
-            "organization": "Murricuh", 
-            "date": "2017-07-04", 
-            "start_time": "08:00:00", 
-            "end_time": "20:00:00",
-            "location": "MURRICUH",
-            "url": "http://facebook.com/MURRICUH"}]
 
 
 deleteAll()
 
 pushData()
 
+print(valid_events)
+print(events)
 # check if a document exists in the collection (just prints)
 
 # check pymongo documentation for any other queries
