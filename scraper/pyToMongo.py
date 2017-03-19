@@ -106,6 +106,8 @@ for event in valid_events:
     event['url'] = "https://www.facebook.com/events/{}".format(event['_id'])
 
 print(len(valid_events))
+for ev in valid_events:
+    print(ev['url'])
 
 #-----------------------------PUSH DATA TO DATABSE
 
@@ -113,8 +115,11 @@ print(len(valid_events))
 
 def pushData():
     for it_event in valid_events:
-        result = collection.insert_one(it_event)
-        result.inserted_id
+        try:
+            result = collection.insert_one(it_event)
+        except Exception:
+            continue
+        #result.inserted_id
 
 
 pushData()
