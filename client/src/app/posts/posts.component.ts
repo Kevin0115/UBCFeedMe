@@ -8,7 +8,7 @@ import {PostsService} from "../posts.service";
 })
 export class PostsComponent implements OnInit {
   posts: Array<Post> = [];
-
+  dateMap: Array<string> = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   constructor(private postsService: PostsService) { }
 
   /**
@@ -21,7 +21,7 @@ export class PostsComponent implements OnInit {
           entry._id,
           entry.event,
           entry.organization,
-          entry.date,
+          parseDate(entry.date, this.dateMap),
           entry.location,
           entry.url,
           parseTime(entry.start_time),
@@ -47,6 +47,9 @@ function parseTime(time){
     timeInt -= 1200;
     isAm = false;
   }
+  else if(timeInt <100){
+    timeInt += 1200;
+  }
 
   var timeString =  timeInt + '';
   var colonPosition = 1;
@@ -61,6 +64,13 @@ function parseTime(time){
     return timeString.slice(0, colonPosition) + ":" + timeString.slice(colonPosition) + "pm";
   }
 }
+
+//Who needs moment.js ?
+function parseDate(date, dateMap){
+  var values = date.trim().split('-');
+  return dateMap[values[1] - 1] + " " + parseInt(values[2]) + ", " + values[0];
+}
+
 export class Post {
   constructor(
     public id: string,
