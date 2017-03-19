@@ -8,5 +8,5 @@ import {PostsService} from "./posts.service";
   providers: [PostsService]
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Find free food at UBC!';
 }

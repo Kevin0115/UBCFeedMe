@@ -3,8 +3,8 @@ const router = express.Router();
 
 var mockTable = {
   "entries": [
-    {"key1": "val1", "key2": "val2"},
-    {"key1": "val3", "key2": "val4"}
+    {"key1": "val1", "key2": "val2", "key3": "val3"},
+    {"key1": "val3", "key2": "val4", "key3": "val5"}
   ]
 };
 
