@@ -3,9 +3,21 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const mongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 
 // Get our API routes
 const api = require('./server/routes/api');
+
+// Mongo connection URL
+var mongoUrl = 'mongodb://read:read@ds135800.mlab.com:35800/ubcfeedme';
+
+// Connect to mongo server
+mongoClient.connect(mongoUrl, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected successfully to mlab server");
+  db.close()
+});
 
 const app = express();
 
@@ -39,3 +51,4 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port, () => console.log(`API running on localhost:${port}`));
+
