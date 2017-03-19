@@ -74,7 +74,7 @@ function parseDate(date, dateMap, weekdayMap){
 
   var d = new Date(parseInt(values[0]), parseInt(values[1]) - 1, parseInt(values[2]), 0, 0,0,0);
 
-  return weekdayMap[d.getDay()] + " " + datee;
+  return weekdayMap[d.getDay()] + ", " + datee;
 }
 
 export class Post {
