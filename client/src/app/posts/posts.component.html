@@ -1,14 +1,22 @@
 <div class="container">
   <table>
     <tr>
-      <th>key1</th>
-      <th>key2</th>
-      <th>key3</th>
+      <th>name</th>
+      <th>org</th>
+      <th>date</th>
+      <th>location</th>
+      <th>url</th>
+      <th>start</th>
+      <th>end</th>
     </tr>
     <tr *ngFor="let post of posts">
-      <td>{{post.val1}}</td>
-      <td>{{post.val2}}</td>
-      <td>{{post.val3}}</td>
+      <td>{{post.eventName}}</td>
+      <td>{{post.org}}</td>
+      <td>{{post.date}}</td>
+      <td>{{post.location}}</td>
+      <td>{{post.url}}</td>
+      <td>{{post.startTime}}</td>
+      <td>{{post.endTime}}</td>
     </tr>
   </table>
 </div>

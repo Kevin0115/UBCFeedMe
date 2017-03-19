@@ -16,8 +16,17 @@ export class PostsComponent implements OnInit {
    */
   ngOnInit() {
     this.postsService.getAllPosts().subscribe(res => {
-      this.posts = res.entries.map(entry => {
-        return new Post(entry.key1, entry.key2, entry.key3)
+      this.posts = res.map(entry => {
+        return new Post(
+          entry.id,
+          entry.eventName,
+          entry.organization,
+          entry.date,
+          entry.location,
+          entry.url,
+          entry.startTime,
+          entry.endTime
+        );
       });
     })
   }
@@ -25,8 +34,13 @@ export class PostsComponent implements OnInit {
 
 class Post {
   constructor(
-    public val1: string,
-    public val2: string,
-    public val3: string
+    public id: string,
+    public eventName: string,
+    public org: string,
+    public date: string,
+    public location: string,
+    public url: string,
+    public startTime: string,
+    public endTime: string
   ) { }
 }

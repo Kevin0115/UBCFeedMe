@@ -1,5 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const mongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+// Mongo connection URL
+var mongoUrl = 'mongodb://read:read@ds135800.mlab.com:35800/ubcfeedme';
+var postsCollection = 'dc';
 
 var mockTable = {
   "entries": [
@@ -8,6 +14,8 @@ var mockTable = {
   ]
 };
 
+
+
 /* GET api listing. */
 router.get('/', (req, res) => {
   res.send('api works')
@@ -15,7 +23,30 @@ router.get('/', (req, res) => {
 
 // Get all posts
 router.get('/posts', (req, res) => {
-  res.send(mockTable)
+  // Connect to mongo server
+    mongoClient.connect(mongoUrl, function(err, db) {
+    assert.equal(null, err);
+    console.log("Connected successfully to mlab server");
+    findDocuments(db, function(docs) {
+      console.log(docs);
+      res.send(docs);
+      db.close();
+    })
+  });
 })
 
+// Mongo methods
+var findDocuments = function(db, callback) {
+  // Get the documents collection
+  var collection = db.collection(postsCollection);
+  // Find some documents
+  collection.find({}).toArray(function(err, docs) {
+    assert.equal(err, null);
+    console.log("Found the following records");
+    // console.log(docs);
+    callback(docs);
+  });
+}
+
 module.exports = router;
+
