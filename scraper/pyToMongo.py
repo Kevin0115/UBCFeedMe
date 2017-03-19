@@ -48,6 +48,10 @@ with open(badWordsFilepath, 'r') as file:
 with open(pageNamesFilepath, 'r') as file:
     page_names = file.read().splitlines()
 
+print(badWords)
+print(goodWords)
+print(page_names)
+
 events = []
 for name in page_names:
     url = "https://graph.facebook.com/v2.8/{}/events?access_token={}&limit={}&fields=id,name,start_time,end_time,description,place&since={}"\
@@ -78,12 +82,12 @@ for event in events:
         continue
 
     for word in badWords:
-        if word in description:
+        if word.lower() in description:
             print("removing a thing")
             break
     else:
         for goodWord in goodWords:
-            if goodWord in description:
+            if goodWord.lower() in description:
                 # event has free good. add to list
                 valid_events.append(event)
                 break
@@ -91,8 +95,8 @@ for event in events:
 # format the event fields
 for event in valid_events:
     event['date'] = event['start_time'].split('T')[0]
-    event['start_time'] = event['start_time'].split('T')[1]
-    event['end_time'] = event['end_time'].split('T')[1]
+    event['start_time'] = event['start_time'].split('T')[1][:-5]
+    event['end_time'] = event['end_time'].split('T')[1][:-5]
     event['_id'] = event['id']
     del event['id']
     event['event'] = event['name']
@@ -118,7 +122,7 @@ def pushData():
 
 
 
-pushData()
+#pushData()
 # check if a document exists in the collection (just prints)
 
 # check pymongo documentation for any other queries
