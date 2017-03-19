@@ -7,7 +7,7 @@ import {Post} from "../posts/posts.component";
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  @Input() posts: Array<Post>;
+  @Input() post: Post;
 
   constructor() { }
 
