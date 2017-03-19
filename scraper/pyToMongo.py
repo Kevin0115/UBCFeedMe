@@ -48,9 +48,6 @@ with open(badWordsFilepath, 'r') as file:
 with open(pageNamesFilepath, 'r') as file:
     page_names = file.read().splitlines()
 
-print(badWords)
-print(goodWords)
-print(page_names)
 
 events = []
 for name in page_names:
@@ -122,7 +119,7 @@ def pushData():
 
 
 
-#pushData()
+pushData()
 # check if a document exists in the collection (just prints)
 
 # check pymongo documentation for any other queries
