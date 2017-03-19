@@ -33,17 +33,9 @@ collection = db.testpy
 #-----------------------------PUSH DATA TO DATABSE
 
 # COMPLETED BY KEVIN
-pushData(events)
 
 
 # for each new arrival of events, check against the database for duplicates
-# don't use this; maybe for error checking JUST in case
-def checkDuplicates(event):
-    if collection.find_one({"_id": it_event["_id"]}):
-        return true
-    else:
-        return false
-
 
 # deletes all documents in the collection
 def deleteAll():
@@ -51,9 +43,8 @@ def deleteAll():
 
 def pushData():
     for it_event in events:
-        if checkDuplicates:
-            
-
+        result = collection.insert_one(it_event)
+        result.inserted_id
 
 # -------------------------------- FOR TESTING
 events = [{"_id": "123456", 
@@ -76,11 +67,7 @@ events = [{"_id": "123456",
 
 deleteAll()
 
-# inserts a document to the collection
-result = collection.insert_one(events[0])
-result.inserted_id
-db.collection_names(include_system_collections=False)
-[u'testpy']
+pushData()
 
 # check if a document exists in the collection (just prints)
 
