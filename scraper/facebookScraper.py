@@ -32,7 +32,10 @@ for name in page_names:
 
     event = requests.get(url)
     organizer = requests.get(url2)
-    event = event.json()['data']
+    try:
+        event = event.json()['data']
+    except Exception:
+        continue
     #print(event)
     organizer = organizer.json()['name']
     for e in events:
@@ -45,7 +48,10 @@ for name in page_names:
 # If a bad word is not found and a good word is (ie. the event likely has free food), add is to the list
 valid_events = []
 for event in events:
-    description = event['description']
+    try:
+        description = event['description']
+    except Exception:
+        continue
 
     for word in badWords:
         if description.find(word):
@@ -75,5 +81,6 @@ for event in valid_events:
 
 
     #print('{}, {}, {}'.format(event['date'], event['start_time'][:-5], event['end_time'][:-5]))
-    print(event)
+    #print(event)
 
+print(valid_events)
