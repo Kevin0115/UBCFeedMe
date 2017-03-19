@@ -18,14 +18,14 @@ export class PostsComponent implements OnInit {
     this.postsService.getAllPosts().subscribe(res => {
       this.posts = res.map(entry => {
         return new Post(
-          entry.id,
-          entry.eventName,
+          entry._id,
+          entry.event,
           entry.organization,
           entry.date,
           entry.location,
           entry.url,
-          entry.startTime,
-          entry.endTime
+          entry.start_time,
+          entry.end_time
         );
       });
     })

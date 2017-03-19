@@ -5,7 +5,7 @@ const assert = require('assert');
 
 // Mongo connection URL
 var mongoUrl = 'mongodb://read:read@ds135800.mlab.com:35800/ubcfeedme';
-var postsCollection = 'dc';
+var postsCollection = 'testpy';
 
 var mockTable = {
   "entries": [
