@@ -76,6 +76,9 @@ for event in events:
             bad = True
             break
 
+    if int(event['end_time'].split('T')[0].split('-')[2]) - int(event['start_time'].split('T')[0].split('-')[2]) > 2:
+        bad = True
+
     if bad is True:
         continue
 
@@ -106,8 +109,6 @@ for event in valid_events:
     event['url'] = "https://www.facebook.com/events/{}".format(event['_id'])
 
 print(len(valid_events))
-for ev in valid_events:
-    print(ev['url'])
 
 #-----------------------------PUSH DATA TO DATABSE
 

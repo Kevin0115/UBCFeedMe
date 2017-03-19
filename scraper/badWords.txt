@@ -3,3 +3,6 @@ early bird
 members only
 restricted access
 free for members
+waitlisted
+waitlist
+selling tickets
