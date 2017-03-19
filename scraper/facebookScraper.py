@@ -38,23 +38,24 @@ for name in page_names:
         continue
     #print(event)
     organizer = organizer.json()['name']
-    for e in events:
+    for e in event:
         e['organization'] = organizer
     events = events + event
 
-#print(events)
+print(events)
 
 # filters events. If a bad word is found the event is either not free or doesn't have food. Skip it.
 # If a bad word is not found and a good word is (ie. the event likely has free food), add is to the list
 valid_events = []
 for event in events:
     try:
-        description = event['description']
+        description = event['description'].lower()
     except Exception:
         continue
 
     for word in badWords:
         if description.find(word):
+            print("removing a thing")
             break
     else:
         for goodWord in goodWords:
@@ -77,10 +78,14 @@ for event in valid_events:
         del event['place']
     except Exception:
         event['location'] = "TBD"
+    try:
+        del event['description']
+    except Exception:
+        continue
 
 
 
     #print('{}, {}, {}'.format(event['date'], event['start_time'][:-5], event['end_time'][:-5]))
     #print(event)
-
+print("valid events")
 print(valid_events)
