@@ -32,7 +32,7 @@ export class PostsComponent implements OnInit {
   }
 }
 
-class Post {
+export class Post {
   constructor(
     public id: string,
     public eventName: string,

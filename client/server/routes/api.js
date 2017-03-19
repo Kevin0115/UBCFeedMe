@@ -28,7 +28,6 @@ router.get('/posts', (req, res) => {
     assert.equal(null, err);
     console.log("Connected successfully to mlab server");
     findDocuments(db, function(docs) {
-      console.log(docs);
       res.send(docs);
       db.close();
     })
@@ -42,8 +41,6 @@ var findDocuments = function(db, callback) {
   // Find some documents
   collection.find({}).toArray(function(err, docs) {
     assert.equal(err, null);
-    console.log("Found the following records");
-    // console.log(docs);
     callback(docs);
   });
 }
