@@ -24,8 +24,8 @@ export class PostsComponent implements OnInit {
           entry.date,
           entry.location,
           entry.url,
-          entry.start_time,
-          entry.end_time,
+          parseTime(entry.start_time),
+          parseTime(entry.end_time),
           parseInt( (entry.date.trim()).concat( entry.start_time.trim() ).split('-').join('').split(':').join(''))
         );
       });
@@ -38,6 +38,29 @@ export class PostsComponent implements OnInit {
   }
 }
 
+//I am so disgusted by what I have created
+function parseTime(time){
+  var timeInt = parseInt( time.trim().slice(0,5).split(':').join('') );
+  var isAm = true;
+
+  if(timeInt >= 1299){
+    timeInt -= 1200;
+    isAm = false;
+  }
+
+  var timeString =  timeInt + '';
+  var colonPosition = 1;
+
+  if(timeInt > 999) {
+    colonPosition = 2;
+  }
+  if(isAm) {
+    return timeString.slice(0, colonPosition) + ":" + timeString.slice(colonPosition) + "am";
+  }
+  else{
+    return timeString.slice(0, colonPosition) + ":" + timeString.slice(colonPosition) + "pm";
+  }
+}
 export class Post {
   constructor(
     public id: string,
