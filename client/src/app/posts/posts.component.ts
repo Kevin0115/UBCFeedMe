@@ -25,10 +25,16 @@ export class PostsComponent implements OnInit {
           entry.location,
           entry.url,
           entry.start_time,
-          entry.end_time
+          entry.end_time,
+          parseInt( (entry.date.trim()).concat( entry.start_time.trim() ).split('-').join('').split(':').join(''))
         );
       });
+      this.posts.sort(function(a, b) {
+        return a.dateInt - b.dateInt;
+      });
     })
+
+
   }
 }
 
@@ -41,6 +47,7 @@ export class Post {
     public location: string,
     public url: string,
     public startTime: string,
-    public endTime: string
+    public endTime: string,
+    public dateInt: number,
   ) { }
 }

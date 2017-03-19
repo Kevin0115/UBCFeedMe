@@ -8,7 +8,9 @@ export class PostsService {
   constructor(private http: Http) { }
 
   getAllPosts() {
-    return this.http.get('/api/posts').map(res => res.json());
+    var posts = this.http.get('/api/posts').map(res => res.json());
+
+    return posts;
   }
 
 }
