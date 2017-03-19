@@ -1,3 +1,12 @@
-<p>
-  posts works!
-</p>
+<div class="container">
+  <table>
+    <tr>
+      <th>key1</th>
+      <th>key2</th>
+    </tr>
+    <tr *ngFor="let post of posts">
+      <td>{{post.key1}}</td>
+      <td>{{post.key2}}</td>
+    </tr>
+  </table>
+</div>
