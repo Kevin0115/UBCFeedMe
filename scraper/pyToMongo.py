@@ -1,14 +1,8 @@
-import pymongo
-import pprint
-import datetime
+from pymongo import MongoClient
 import requests
 import time
-import re
-import json
 
-from pymongo import MongoClient
-
-# author: Kevin
+# author: Kevin, Mathew
 # sample code that demonstrates how to update/create/delete documents in a specific collection on MongoDB
 
 #### SETUP THE CLIENT ####
@@ -16,10 +10,8 @@ from pymongo import MongoClient
 # initialize the MongoClient
 client = MongoClient()
 client = MongoClient('mongodb://Kevin0115:K3vinCh0i!@ds135800.mlab.com:35800/ubcfeedme')
-# get an instance of the database
-db = client['ubcfeedme']
-# get the collection
-collection = db.testpy
+db = client['ubcfeedme'] # get an instance of the database
+collection = db.testpy # get the collection
 
 result = db.testpy.delete_many({})
 
@@ -62,7 +54,7 @@ for name in page_names:
         event = event.json()['data']
     except Exception:
         continue
-    #print(event)
+
     organizer = organizer.json()['name']
     for e in event:
         e['organization'] = organizer
@@ -78,16 +70,20 @@ for event in events:
     except Exception:
         continue
 
+    bad = False
     for word in badWords:
         if word.lower() in description:
-            print("removing a thing")
+            bad = True
             break
-    else:
-        for goodWord in goodWords:
-            if goodWord.lower() in description:
-                # event has free good. add to list
-                valid_events.append(event)
-                break
+
+    if bad is True:
+        continue
+
+    for goodWord in goodWords:
+        if goodWord.lower() in description:
+            # event has free good. add to list
+            valid_events.append(event)
+            break
 
 # format the event fields
 for event in valid_events:
@@ -107,6 +103,9 @@ for event in valid_events:
         del event['description']
     except Exception:
         continue
+    event['url'] = "https://www.facebook.com/events/{}".format(event['_id'])
+
+print(len(valid_events))
 
 #-----------------------------PUSH DATA TO DATABSE
 
@@ -118,10 +117,7 @@ def pushData():
         result.inserted_id
 
 
-
 pushData()
 # check if a document exists in the collection (just prints)
 
 # check pymongo documentation for any other queries
-
-# -------------------------------- DONE TESTING
