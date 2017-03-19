@@ -57,6 +57,7 @@ for event in events:
                 valid_events.append(event)
                 break
 
+# format the event fields
 for event in valid_events:
     event['date'] = event['start_time'].split('T')[0]
     event['start_time'] = event['start_time'].split('T')[1]
@@ -65,8 +66,12 @@ for event in valid_events:
     del event['id']
     event['event'] = event['name']
     del event['name']
-    # event['location'] = event['place']['name']
-    # del event['place']
+    try:
+        event['location'] = event['place']['name']
+        del event['place']
+    except Exception:
+        event['location'] = "TBD"
+
 
 
     #print('{}, {}, {}'.format(event['date'], event['start_time'][:-5], event['end_time'][:-5]))
