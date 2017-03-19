@@ -124,8 +124,7 @@ deleteAll()
 
 pushData()
 
-print(valid_events)
-print(events)
+
 # check if a document exists in the collection (just prints)
 
 # check pymongo documentation for any other queries
