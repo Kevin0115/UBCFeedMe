@@ -21,6 +21,7 @@ db = client['ubcfeedme']
 # get the collection
 collection = db.testpy
 
+result = db.testpy.delete_many({})
 
 #-----------------------------FLUSH (we re-scrape anyways)
 
@@ -66,7 +67,6 @@ for name in page_names:
         e['organization'] = organizer
     events = events + event
 
-print(events)
 
 # filters events. If a bad word is found the event is either not free or doesn't have food. Skip it.
 # If a bad word is not found and a good word is (ie. the event likely has free food), add is to the list
@@ -111,24 +111,14 @@ for event in valid_events:
 
 # COMPLETED BY KEVIN
 
-
-# for each new arrival of events, check against the database for duplicates
-
-# deletes all documents in the collection
-def deleteAll():
-    result = db.testpy.delete_many({})
-
 def pushData():
     for it_event in valid_events:
         result = collection.insert_one(it_event)
         result.inserted_id
 
 
-deleteAll()
 
 pushData()
-
-
 # check if a document exists in the collection (just prints)
 
 # check pymongo documentation for any other queries
