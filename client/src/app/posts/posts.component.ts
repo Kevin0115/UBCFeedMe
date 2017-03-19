@@ -17,7 +17,7 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     this.postsService.getAllPosts().subscribe(res => {
       this.posts = res.entries.map(entry => {
-        new Post(entry.key1, entry.key2, entry.key3)
+        return new Post(entry.key1, entry.key2, entry.key3)
       });
     })
   }
