@@ -9,6 +9,8 @@ import {PostsService} from "../posts.service";
 export class PostsComponent implements OnInit {
   posts: Array<Post> = [];
   dateMap: Array<string> = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  weekdayMap: Array<string> = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
   constructor(private postsService: PostsService) { }
 
   /**
@@ -21,7 +23,7 @@ export class PostsComponent implements OnInit {
           entry._id,
           entry.event,
           entry.organization,
-          parseDate(entry.date, this.dateMap),
+          parseDate(entry.date, this.dateMap, this.weekdayMap),
           entry.location,
           entry.url,
           parseTime(entry.start_time),
@@ -66,9 +68,13 @@ function parseTime(time){
 }
 
 //Who needs moment.js ?
-function parseDate(date, dateMap){
+function parseDate(date, dateMap, weekdayMap){
   var values = date.trim().split('-');
-  return dateMap[values[1] - 1] + " " + parseInt(values[2]) + ", " + values[0];
+  var datee = dateMap[values[1] - 1] + " " + parseInt(values[2]) + ", " + values[0];
+
+  var d = new Date(parseInt(values[0]), parseInt(values[1]) - 1, parseInt(values[2]), 0, 0,0,0);
+
+  return weekdayMap[d.getDay()] + " " + datee;
 }
 
 export class Post {
