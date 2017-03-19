@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import requests
 import time
+import re
 
 # author: Kevin, Mathew
 # sample code that demonstrates how to update/create/delete documents in a specific collection on MongoDB
@@ -81,6 +82,14 @@ for event in events:
 
     if bad is True:
         continue
+
+    nineteen_plus = False
+    regexp1 = re.compile(r'19\+')
+    regexp2 = re.compile(r'19 and up')
+    regexp3 = re.compile(r'19 plus')
+
+    if regexp1.search(description) or regexp2.search(description) or regexp3.search(description):
+        event['name'] = "{}    {}".format(event['name'], "(19+)")
 
     for goodWord in goodWords:
         if goodWord.lower() in description:
