@@ -78,12 +78,12 @@ for event in events:
         continue
 
     for word in badWords:
-        if description.find(word):
+        if word in description:
             print("removing a thing")
             break
     else:
         for goodWord in goodWords:
-            if description.find(goodWord):
+            if goodWord in description:
                 # event has free good. add to list
                 valid_events.append(event)
                 break
