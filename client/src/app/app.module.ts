@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
 import {RouterModule} from "@angular/router";
+import { PostComponent } from './post/post.component';
 
 // Define routes
 const ROUTES = [
@@ -23,7 +24,8 @@ const ROUTES = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent
+    PostsComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
